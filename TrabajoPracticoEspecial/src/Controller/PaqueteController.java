@@ -14,9 +14,19 @@ public class PaqueteController extends Controller<List<Paquete>> {
 
     @Override
     public void inicializarDatos(String path) {
-        // Aquí se implementaría la lógica para leer los datos de los paquetes desde un archivo o fuente de datos
-        // Por ejemplo, podríamos usar un BufferedReader para leer un archivo CSV y crear objetos Paquete
-        // Luego, esos objetos se agregarían a la lista 'paquetes'
+
+        List<String[]> datos = readPath(path); 
+        for (String[] linea : datos) {
+           
+            int id = Integer.parseInt(linea[0]);
+            String codigoPaquete = linea[1];
+            double peso = Double.parseDouble(linea[2]);
+            boolean contieneAlimentos = linea[3].equals("1");
+            int nivelUrgencia = Integer.parseInt(linea[4]);
+
+            Paquete paquete = new Paquete(id, codigoPaquete, peso, contieneAlimentos, nivelUrgencia);
+            this.paquetes.add(paquete);
+        }
     }
 
     @Override

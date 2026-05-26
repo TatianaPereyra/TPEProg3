@@ -1,6 +1,8 @@
 package Controller;
 
 import Entidad.Camion;
+import Entidad.Paquete;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,18 @@ public class CamionController extends Controller<List<Camion>> {
 
     @Override
     public void inicializarDatos(String path) {
-        // Aquí se implementaría la lógica para leer los datos de los camiones desde un archivo
-        // y llenar la lista camiones. Por ahora, se puede simular con datos de ejemplo.
+
+        List<String[]> datos = readPath(path); 
+        for (String[] linea : datos) {
+
+            int id = Integer.parseInt(linea[0]);
+            String patente = linea[1];
+            boolean estaRefrigerado = linea[2].equals("1");
+            Double capacidad = Double.parseDouble(linea[3]);
+
+            Camion camion = new Camion(id, patente, estaRefrigerado, capacidad);
+            this.camiones.add(camion);
+        }
     }
 
     @Override
