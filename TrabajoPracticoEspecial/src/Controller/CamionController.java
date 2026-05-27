@@ -1,8 +1,6 @@
 package Controller;
 
 import Entidad.Camion;
-import Entidad.Paquete;
-
 import java.util.ArrayList;
 import java.util.List;
 

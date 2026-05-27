@@ -14,7 +14,7 @@ public class Servicios {
 
     public Servicios(String pathCamiones, String pathPaquetes) {
         //this.paquetes = new HashMap<>();
-        this.camionController = new CamionController(pathCamiones);
+        //this.camionController = new CamionController(pathCamiones);
         this.paqueteController = new PaqueteController(pathPaquetes);
         this.paquetes = new HashMap<>();
         inicializarDatos();

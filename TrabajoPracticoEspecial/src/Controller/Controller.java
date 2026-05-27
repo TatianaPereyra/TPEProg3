@@ -1,12 +1,21 @@
 package Controller;
 
-
+import com.opencsv.*;
+import java.io.FileReader;
+import java.util.List;
 public abstract class Controller<T> {
 
-    protected T readPath(String path) {
-        // Aquí se implementaría la lógica para leer un archivo CSV utilizando OpenCSV
-        // y devolver los datos en el formato adecuado (por ejemplo, una lista de objetos).
-        return null; // Placeholder, se debe reemplazar con la implementación real.
+    protected List<String[]> readPath(String path) {
+       try{
+            CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
+            CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withCSVParser(parser).build();
+            List<String[]> datos = reader.readAll();
+
+            return datos;
+       } catch(Exception e){
+                System.out.println("Error al leer el archivo: " + e.getMessage());
+                return null;
+         }
     }
     
     public abstract void inicializarDatos(String path);

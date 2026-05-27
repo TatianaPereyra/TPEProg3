@@ -1,6 +1,23 @@
+import Entidad.Paquete;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        
+        String pathPaquetes = "prueba.csv";
+
+        Servicios servicio = new Servicios(null, pathPaquetes);
+
+        // Prueba del servicio 1
+        String codigoPaquete = "P001";
+        
+        Paquete paquete = servicio.servicio1(codigoPaquete);
+        if (paquete != null) {
+            System.out.println("Servicio 1 - Paquete encontrado: " + paquete);
+       
+        } else {
+            System.out.println("Servicio 1 - Paquete no encontrado con código: " + codigoPaquete);
+        }
+        
     }
 
 
