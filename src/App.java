@@ -1,3 +1,4 @@
+import ArbolBinario.ArbolBinario;
 import Entidad.Paquete;
 
 public class App {
@@ -6,7 +7,9 @@ public class App {
         String pathPaquetes = "prueba.csv";
 
         Servicios servicio = new Servicios(null, pathPaquetes);
+        System.out.println(servicio.servicio3(3, 50));
 
+        /* 
         // Prueba del servicio 1
         String codigoPaquete = "P001";
         
@@ -17,7 +20,7 @@ public class App {
         } else {
             System.out.println("Servicio 1 - Paquete no encontrado con código: " + codigoPaquete);
         }
-        
+        */
     }
 
 
