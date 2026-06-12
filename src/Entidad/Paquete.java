@@ -1,5 +1,6 @@
 package Entidad;
-public class Paquete {
+
+public class Paquete implements Comparable<Paquete>{
     private int id_paquete;
     private String codigo_paquete;
     private double peso_kg;
@@ -45,4 +46,8 @@ public class Paquete {
                 '}' + "\n";
     }
 
+    @Override
+    public int compareTo(Paquete otroPaquete) {
+        return Double.compare(otroPaquete.peso_kg, this.peso_kg);
+    }
 }

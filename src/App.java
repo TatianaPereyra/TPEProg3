@@ -2,23 +2,11 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         String pathPaquetes = "prueba.csv";
+        String pathCamiones = "pruebaCamiones.csv";
 
-        Servicios servicio = new Servicios(null, pathPaquetes);
+        Servicios servicio = new Servicios(pathCamiones, pathPaquetes);
 
-        System.out.println(servicio.servicio3(1, 50));
-
-        /* 
-        // Prueba del servicio 1
-        String codigoPaquete = "P001";
-        
-        Paquete paquete = servicio.servicio1(codigoPaquete);
-        if (paquete != null) {
-            System.out.println("Servicio 1 - Paquete encontrado: " + paquete);
-       
-        } else {
-            System.out.println("Servicio 1 - Paquete no encontrado con código: " + codigoPaquete);
-        }
-        */
+        servicio.servicioGreedy();
     }
 
 

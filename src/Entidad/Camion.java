@@ -1,5 +1,6 @@
 package Entidad;
-public class Camion {
+
+public class Camion implements Comparable<Camion>{
     private int id_camion;
     private String patente;
     private boolean esta_refrigerado;
@@ -37,5 +38,17 @@ public class Camion {
                 ", esta_refrigerado=" + esta_refrigerado +
                 '}';
     }
+
+    /**
+     * Compara camiones por su capacidad de carga, de mayor a menor.
+     * @param otroCamion El otro camión a comparar.
+     * @return Un valor negativo si este camión tiene menor capacidad,
+     *  positivo si tiene mayor capacidad, o cero si tienen la misma capacidad.
+     */
+    @Override
+    public int compareTo(Camion otroCamion) {
+        return Double.compare(otroCamion.capacidad_kg, this.capacidad_kg);
+    }
 }
+
    

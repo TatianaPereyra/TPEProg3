@@ -1,6 +1,8 @@
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+
 import Entidad.Camion;
 import Entidad.Paquete;
 import java.util.List;
@@ -16,13 +18,19 @@ public class Servicios {
     private List<Paquete> paquetesConAlimentos;
     private List<Paquete> paquetesSinAlimentos;
 
+    private List<Camion> camiones;
+
 
     public Servicios(String pathCamiones, String pathPaquetes) {
         this.paquetes = new HashMap<>();
         this.paquetesConAlimentos = new ArrayList<>();
         this.paquetesSinAlimentos = new ArrayList<>();
         this.arbolPaquetes = new ArbolBinario();
+
+        this.camiones = new ArrayList<>();
+
         inicializarPaquetes(pathPaquetes);
+        inicializarCamiones(pathCamiones);
     }
 
     private void inicializarPaquetes(String pathPaquetes) {
@@ -48,6 +56,21 @@ public class Servicios {
 
             this.arbolPaquetes.addElement(paquete);
         }
+    }
+
+    private void inicializarCamiones(String pathCamiones){
+        List<String[]> datos = readPath(pathCamiones); 
+
+        for (String[] linea : datos) {
+            int id = Integer.parseInt(linea[0]);
+            String patenteString = linea[1];
+            boolean estaRefrigerado = linea[2].equals("1");
+            double capacidadKg= Double.parseDouble(linea[3]);
+
+            Camion camion = new Camion(id, patenteString, estaRefrigerado, capacidadKg);
+            this.camiones.add(camion);
+        }
+
     }
 
 
@@ -101,6 +124,16 @@ public class Servicios {
     }
     
 
+    public void servicioGreedy(){
+        ArrayList<Paquete> paquetes = new ArrayList<>();
+        paquetes.addAll(this.paquetesConAlimentos);
+        paquetes.addAll(this.paquetesSinAlimentos);
+
+        Greedy servicioGreedy = new Greedy(camiones, paquetes);
+        Solucion solucion = servicioGreedy.asignarPaquetes();
+
+        System.out.print(solucion);
+    }
 
 
 }
