@@ -36,13 +36,13 @@ public class Paquete {
 
     @Override
     public String toString() {
-        return "Paquete{" +
-                "id_paquete=" + id_paquete +
-                ", codigo_paquete='" + codigo_paquete + '\'' +
-                ", peso_kg=" + peso_kg +
-                ", contiene_alimentos=" + contiene_alimentos +
-                ", nivel_urgencia=" + nivel_urgencia +
-                '}';
+        return  "\n" + "{" + 
+                "id_paquete :" + id_paquete + "\n" + 
+                "codigo_paquete : '" + codigo_paquete + "\n" +
+                "peso_kg : " + peso_kg + "\n" +
+                "contiene_alimentos : " + contiene_alimentos + "\n" +
+                "nivel_urgencia : " + nivel_urgencia +
+                '}' + "\n";
     }
 
 }

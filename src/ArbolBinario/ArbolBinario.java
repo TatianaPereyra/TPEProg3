@@ -74,33 +74,30 @@ public class ArbolBinario {
         }
     }
 
+
     public List<Paquete> buscarPaquetesEnRango(int urgenciaMinima, int urgenciaMaxima) {
         List<Paquete> paquetes = new ArrayList<>();
-        Nodo actual = this.buscarNodo(root, urgenciaMinima);
-        if(actual == null) {
-            this.buscarPaquetesEnRango(this.root, urgenciaMinima, urgenciaMaxima, paquetes);
-        }
-        else {
-            this.buscarPaquetesEnRango(actual, urgenciaMinima, urgenciaMaxima, paquetes);
-        }
-
+        buscarPaquetesEnRango(this.root, urgenciaMinima, urgenciaMaxima, paquetes);
         return paquetes;
     }
 
-    private void buscarPaquetesEnRango(Nodo actual, int urgenciaMinima, int urgenciaMaxima, List<Paquete> paquetes){
-
-        if(actual == null) {
+    private void buscarPaquetesEnRango(Nodo actual, int urgenciaMinima, int urgenciaMaxima, List<Paquete> paquetes) {
+        if (actual == null) {
             return;
         }
-        
-        if(actual.getKey() >= urgenciaMinima && actual.getKey() <= urgenciaMaxima ) {
+
+        if (actual.getKey() > urgenciaMinima) { //Si la urgencia actual es mayor al minimo puedo buscar por izquierda
+            buscarPaquetesEnRango(actual.getLeft(), urgenciaMinima, urgenciaMaxima, paquetes);
+        }
+
+        if (actual.getKey() >= urgenciaMinima && actual.getKey() <= urgenciaMaxima) { //si cumple agrego todo
             paquetes.addAll(actual.getPaquetes());
         }
-       
-        buscarPaquetesEnRango(actual.getLeft(), urgenciaMinima, urgenciaMaxima, paquetes);
-        buscarPaquetesEnRango(actual.getRight(), urgenciaMinima, urgenciaMaxima, paquetes);
-    }
 
+        if (actual.getKey() < urgenciaMaxima) { //si la urgencia actual es menor al maximo puedo buscar por derecha
+            buscarPaquetesEnRango(actual.getRight(), urgenciaMinima, urgenciaMaxima, paquetes);
+        }
+    }
 
     private class Nodo {
         private int key;

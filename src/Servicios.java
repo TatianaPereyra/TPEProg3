@@ -16,7 +16,6 @@ public class Servicios {
     private List<Paquete> paquetesConAlimentos;
     private List<Paquete> paquetesSinAlimentos;
 
-    //binaryTree de paquetes ordenados por nivel de urgencia
 
     public Servicios(String pathCamiones, String pathPaquetes) {
         this.paquetes = new HashMap<>();

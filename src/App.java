@@ -1,13 +1,11 @@
-import ArbolBinario.ArbolBinario;
-import Entidad.Paquete;
-
 public class App {
     public static void main(String[] args) throws Exception {
         
         String pathPaquetes = "prueba.csv";
 
         Servicios servicio = new Servicios(null, pathPaquetes);
-        System.out.println(servicio.servicio3(3, 50));
+
+        System.out.println(servicio.servicio3(1, 50));
 
         /* 
         // Prueba del servicio 1
