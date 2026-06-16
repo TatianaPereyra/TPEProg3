@@ -135,5 +135,16 @@ public class Servicios {
         System.out.print(solucion);
     }
 
+    public void servicioBacktracking(){
+        ArrayList<Paquete> paquetes = new ArrayList<>();
+        paquetes.addAll(this.paquetesConAlimentos);
+        paquetes.addAll(this.paquetesSinAlimentos);
+
+        Backtracking servicioBacktracking = new Backtracking(camiones, paquetes);
+        Solucion solucion = servicioBacktracking.asignarPaquetes();
+
+        System.out.print(solucion);
+    }
+
 
 }

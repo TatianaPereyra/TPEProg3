@@ -6,7 +6,7 @@ public class App {
 
         Servicios servicio = new Servicios(pathCamiones, pathPaquetes);
 
-        servicio.servicioGreedy();
+        servicio.servicioBacktracking();
     }
 
 

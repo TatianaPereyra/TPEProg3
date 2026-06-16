@@ -5,16 +5,17 @@ import Entidad.Camion;
 import Entidad.Paquete;
 
 public class Solucion {
+
     private HashMap<Camion, List<Paquete>> asignaciones;
     private HashMap<Camion, Double> capacidadUtilizada;
     private double pesoTotalNoAsignado;
-    private int cantidadCandidatosConsiderados;
+    private int cantMetricaUtilizada;
 
     public Solucion() {
         this.asignaciones = new HashMap<>();
         this.capacidadUtilizada = new HashMap<>();
-        this.pesoTotalNoAsignado = 0.0;
-        this.cantidadCandidatosConsiderados = 0;
+        this.pesoTotalNoAsignado = Integer.MAX_VALUE;
+        this.cantMetricaUtilizada = 0;
     }
 
 
@@ -47,7 +48,7 @@ public class Solucion {
         
         }else{
             if(!this.capacidadUtilizada.containsKey(camion)){
-                return true;
+                return camion.getCapacidad_kg() >= paquete.getPeso_kg();
             
             }else{
                 return this.capacidadUtilizada.get(camion) + paquete.getPeso_kg() <= camion.getCapacidad_kg();
@@ -57,12 +58,16 @@ public class Solucion {
 
     }
 
+    public double getPesoNoAsignado(){
+        return this.pesoTotalNoAsignado;
+    }
+
     public void setPesoNoAsignado(Double peso){
         this.pesoTotalNoAsignado = peso;
     }
 
-    public void setCantidadCandidatosConsiderados(int cantidad){
-        this.cantidadCandidatosConsiderados = cantidad;
+    public void setcantMetricaUtilizada(int cantidad){
+        this.cantMetricaUtilizada = cantidad;
     }
 
 
@@ -76,7 +81,7 @@ public class Solucion {
         }
 
         resultado += "Peso no asignado: " + pesoTotalNoAsignado + " kg.\n";
-        resultado += "Métrica para analizar el costo de la solución: " + this.cantidadCandidatosConsiderados;
+        resultado += "Métrica para analizar el costo de la solución: " + this.cantMetricaUtilizada;
 
         return resultado;
     }

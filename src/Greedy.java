@@ -7,6 +7,7 @@ import Entidad.Camion;
 import Entidad.Paquete;
 
 public class Greedy {
+
     private List<Camion> candidatosCamiones;
     private ArrayList<Paquete> candidatosPaquetes;
     private Solucion solucion;
@@ -39,14 +40,12 @@ public class Greedy {
                 if(this.solucion.puedeSerAsignado(camionActual, paqueteActual)){
                     this.solucion.asignar(camionActual, paqueteActual);
                     itPaquIterator.remove();
-                
-
-            }
+                }
             }
             
         }
 
-        this.solucion.setCantidadCandidatosConsiderados(cantCamiones * cantPaquetes);
+        this.solucion.setcantMetricaUtilizada(cantCamiones * cantPaquetes);
 
         if(!this.candidatosPaquetes.isEmpty()){
             Double peso = 0.0;
