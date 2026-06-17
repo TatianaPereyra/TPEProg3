@@ -1,7 +1,6 @@
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import Entidad.Camion;
 import Entidad.Paquete;
@@ -17,10 +16,15 @@ public class Servicios {
     private ArbolBinario arbolPaquetes;
     private List<Paquete> paquetesConAlimentos;
     private List<Paquete> paquetesSinAlimentos;
-
     private List<Camion> camiones;
 
-
+    /**
+     * El constructor llama a los métodos de inicializar datos, los cuales recorren todos los 
+     * paquetes y camiones. 
+     * Por lo tanto, la complejidad computacional es O(n + m) 
+     * donde n son la cantidad de paquetes a recorrer y m la cantidad de camiones a recorrer.
+     */
+    
     public Servicios(String pathCamiones, String pathPaquetes) {
         this.paquetes = new HashMap<>();
         this.paquetesConAlimentos = new ArrayList<>();
@@ -98,14 +102,20 @@ public class Servicios {
         }
     }
 
-    /*
+
+    /**
+     * Metodo para devolver todos los paquetes que estan entre un rango de urgencia.
+     * La complejidad computacional es O(n) ya que el peor de los casos es que pidan todos los niveles, y se deba recorrer
+     * todo el arbol donde se almacenan los paquetes segun su nivel de urgencia.
      */
 
     public List<Paquete> servicio3(int urgenciaMinima, int urgenciaMaxima) {
         List<Paquete> paquetes = new ArrayList<>();
+
         if(urgenciaMinima > 0 && urgenciaMaxima > 0 && urgenciaMinima <= urgenciaMaxima){
             paquetes = this.arbolPaquetes.buscarPaquetesEnRango(urgenciaMinima, urgenciaMaxima);
         }
+
         return paquetes;
     }
 
@@ -124,7 +134,7 @@ public class Servicios {
     }
     
 
-    public void servicioGreedy(){
+    public Solucion servicioGreedy(){
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes.addAll(this.paquetesConAlimentos);
         paquetes.addAll(this.paquetesSinAlimentos);
@@ -132,10 +142,11 @@ public class Servicios {
         Greedy servicioGreedy = new Greedy(camiones, paquetes);
         Solucion solucion = servicioGreedy.asignarPaquetes();
 
-        System.out.print(solucion);
+        return solucion;
+
     }
 
-    public void servicioBacktracking(){
+    public Solucion servicioBacktracking(){
         ArrayList<Paquete> paquetes = new ArrayList<>();
         paquetes.addAll(this.paquetesConAlimentos);
         paquetes.addAll(this.paquetesSinAlimentos);
@@ -143,7 +154,7 @@ public class Servicios {
         Backtracking servicioBacktracking = new Backtracking(camiones, paquetes);
         Solucion solucion = servicioBacktracking.asignarPaquetes();
 
-        System.out.print(solucion);
+        return solucion;
     }
 
 

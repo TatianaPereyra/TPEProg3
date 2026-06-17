@@ -18,11 +18,18 @@ public class Greedy {
         this.solucion = new Solucion();
     }
 
-    public Solucion asignarPaquetes(){
-        // Ordenar los camiones por capacidad de carga (de mayor a menor)
-        Collections.sort(this.candidatosCamiones);
+    /**
+     * Estrategia Greedy: se ordenan camiones y paquetes de mayor a menor peso.
+     * La función de selección elige siempre el paquete más pesado disponible para
+     * asignarlo al camión actual, con el objetivo de minimizar el peso no asignado
+     * aprovechando al máximo la capacidad de cada camión.
+     * Por cada par (camion-paquete) se verifica si el paquete puede ser asignado.
+     * Al finalizar los camiones, los paquetes restantes quedan sin asignar y su
+     * peso total forma parte de la solución.
+     */
 
-        // Ordenar los paquetes por nivel de urgencia (de mayor a menor)
+    public Solucion asignarPaquetes(){
+        Collections.sort(this.candidatosCamiones);
         Collections.sort(this.candidatosPaquetes);
 
         int cantCamiones = 0;

@@ -6,7 +6,6 @@ import java.util.List;
 import Entidad.Paquete;
 
 public class ArbolBinario {
-
     private Nodo root;
 
     public ArbolBinario() {

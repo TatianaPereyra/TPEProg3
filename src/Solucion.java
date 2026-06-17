@@ -5,7 +5,6 @@ import Entidad.Camion;
 import Entidad.Paquete;
 
 public class Solucion {
-
     private HashMap<Camion, List<Paquete>> asignaciones;
     private HashMap<Camion, Double> capacidadUtilizada;
     private double pesoTotalNoAsignado;
@@ -41,6 +40,10 @@ public class Solucion {
         }
     }
 
+    /**
+     * Verifica que el paquete pueda ser asignado al camion.
+     */
+
     public boolean puedeSerAsignado(Camion camion, Paquete paquete){
 
         if(paquete.isContiene_alimentos() && !camion.isEsta_refrigerado()){
@@ -58,6 +61,27 @@ public class Solucion {
 
     }
 
+    public void desasignar(Camion camion, Paquete paquete) {
+        this.asignaciones.get(camion).remove(paquete);
+        double pesoActual = this.capacidadUtilizada.get(camion);
+        this.capacidadUtilizada.put(camion, pesoActual - paquete.getPeso_kg());
+    }
+
+
+    public Solucion copiar() {
+        Solucion nueva = new Solucion();
+
+        for (Camion camion : this.asignaciones.keySet()) {
+            nueva.asignaciones.put(camion, new ArrayList<>(this.asignaciones.get(camion))); // copia la lista
+            nueva.capacidadUtilizada.put(camion, this.capacidadUtilizada.get(camion));
+        }
+
+        nueva.pesoTotalNoAsignado = this.pesoTotalNoAsignado;
+        nueva.cantMetricaUtilizada = this.cantMetricaUtilizada;
+
+        return nueva;
+    }
+
     public double getPesoNoAsignado(){
         return this.pesoTotalNoAsignado;
     }
@@ -70,11 +94,14 @@ public class Solucion {
         this.cantMetricaUtilizada = cantidad;
     }
 
+    public int getCantMetricas(){
+        return this.cantMetricaUtilizada;
+    }
+
 
     @Override
     public String toString() {
-        String resultado = "\n"; 
-        resultado += "Solución obtenida:\n";
+        String resultado = "Solución obtenida:\\n";
 
         for (Camion camion : asignaciones.keySet()) {
             resultado += camion + ": " + asignaciones.get(camion) + "\n";
