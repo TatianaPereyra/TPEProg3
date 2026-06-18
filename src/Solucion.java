@@ -101,7 +101,7 @@ public class Solucion {
 
     @Override
     public String toString() {
-        String resultado = "Solución obtenida:\\n";
+        String resultado = "Solución obtenida:\n";
 
         for (Camion camion : asignaciones.keySet()) {
             resultado += camion + ": " + asignaciones.get(camion) + "\n";

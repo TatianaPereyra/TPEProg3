@@ -32,17 +32,14 @@ public class Greedy {
         Collections.sort(this.candidatosCamiones);
         Collections.sort(this.candidatosPaquetes);
 
-        int cantCamiones = 0;
-        int cantPaquetes = 0;
+        this.solucion.setcantMetricaUtilizada(this.candidatosCamiones.size() * this.candidatosPaquetes.size());
 
         for(Camion camionActual : this.candidatosCamiones){
-            cantCamiones ++;
 
             Iterator<Paquete> itPaquIterator = this.candidatosPaquetes.iterator();
 
             while(itPaquIterator.hasNext()){
                 Paquete paqueteActual = itPaquIterator.next();
-                cantPaquetes++;
 
                 if(this.solucion.puedeSerAsignado(camionActual, paqueteActual)){
                     this.solucion.asignar(camionActual, paqueteActual);
@@ -51,8 +48,6 @@ public class Greedy {
             }
             
         }
-
-        this.solucion.setcantMetricaUtilizada(cantCamiones * cantPaquetes);
 
         if(!this.candidatosPaquetes.isEmpty()){
             Double peso = 0.0;

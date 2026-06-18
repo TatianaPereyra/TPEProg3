@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import Entidad.Paquete;
 
@@ -9,6 +8,9 @@ public class App {
         String pathCamiones = "pruebaCamiones.csv";
 
         Servicios servicio = new Servicios(pathCamiones, pathPaquetes);
+
+        System.out.println("Cantidad Total de camiones: " + servicio.getCantCamiones() + "\n" +
+                            "Cantidad total de Paquetes: " + servicio.getCantPaquetes() + "\n");
 
         //Servicio 1
         Paquete servicio1 = servicio.servicio1("P002");

@@ -18,6 +18,9 @@ public class Servicios {
     private List<Paquete> paquetesSinAlimentos;
     private List<Camion> camiones;
 
+    private int cantTotalPaquetes;
+    private int cantTotalCamiones;
+
     /**
      * El constructor llama a los métodos de inicializar datos, los cuales recorren todos los 
      * paquetes y camiones. 
@@ -33,6 +36,9 @@ public class Servicios {
 
         this.camiones = new ArrayList<>();
 
+        this.cantTotalPaquetes = 0;
+        this.cantTotalCamiones = 0;
+
         inicializarPaquetes(pathPaquetes);
         inicializarCamiones(pathCamiones);
     }
@@ -40,7 +46,10 @@ public class Servicios {
     private void inicializarPaquetes(String pathPaquetes) {
         List<String[]> datos = readPath(pathPaquetes); 
 
-        for (String[] linea : datos) {
+        this.cantTotalPaquetes = Integer.parseInt(datos.get(0)[0]); 
+
+        for (int i = 1; i < datos.size(); i++) {
+            String[] linea = datos.get(i);
            
             int id = Integer.parseInt(linea[0]);
             String codigoPaquete = linea[1];
@@ -65,7 +74,11 @@ public class Servicios {
     private void inicializarCamiones(String pathCamiones){
         List<String[]> datos = readPath(pathCamiones); 
 
-        for (String[] linea : datos) {
+        this.cantTotalCamiones = Integer.parseInt(datos.get(0)[0]);
+
+        for (int i = 1; i < datos.size(); i++) {
+            String[] linea = datos.get(i);
+
             int id = Integer.parseInt(linea[0]);
             String patenteString = linea[1];
             boolean estaRefrigerado = linea[2].equals("1");
@@ -157,5 +170,13 @@ public class Servicios {
         return solucion;
     }
 
+
+    public int getCantPaquetes(){
+        return this.cantTotalPaquetes;
+    }
+
+    public int getCantCamiones(){
+        return this.cantTotalCamiones;
+    }
 
 }
